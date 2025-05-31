@@ -27,3 +27,13 @@ func (gui *Gui) HandleCmdDisplay(g *gocui.Gui, v *gocui.View) error {
 	// fmt.Fprint(os.Stdout, gui.windows[0].Name)
 	return ToggleWindowDisplay(gui.windows[2], gui.g)
 }
+
+/*
+Note view
+*/
+
+// View setup;
+func (gui *Gui) HandleSendNote(g *gocui.Gui, v *gocui.View) error {
+	// fmt.Fprint(os.Stdout, gui.windows[0].Name)
+	return gui.SendNote(FetchContent(gui.windows[0], gui.g))
+}

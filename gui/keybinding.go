@@ -54,5 +54,11 @@ func CreateAllKeybinders(gui *Gui) []*models.KeyBinder {
 			Modifier: gocui.ModNone,
 			Handler:  gui.HandleCmdDisplay,
 		},
+		{
+			ViewName: "note",
+			Key:      "enter",
+			Modifier: gocui.ModNone,
+			Handler:  gui.HandleSendNote,
+		},
 	}
 }

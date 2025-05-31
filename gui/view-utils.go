@@ -1,6 +1,8 @@
 package gui
 
 import (
+	"strings"
+
 	"github.com/haochend413/mantis/models"
 	"github.com/jroimartin/gocui"
 )
@@ -45,45 +47,7 @@ func ToggleWindowDisplay(w *models.Window, g *gocui.Gui) error {
 	return nil
 }
 
-// var VIEW_SWITCH_HISTORY []string
-
-// func ToggleWindowDisplay(w *models.Window, g *gocui.Gui) error {
-// 	w.OnDisplay = !w.OnDisplay
-
-// 	return g.Update(func(g *gocui.Gui) error {
-// 		current := g.CurrentView()
-// 		if current != nil && current.Name() != w.Name {
-// 			// Only push to history if it's not already the view being toggled
-// 			VIEW_SWITCH_HISTORY = append(VIEW_SWITCH_HISTORY, current.Name())
-// 		}
-
-// 		if w.OnDisplay {
-// 			v, err := g.SetView(w.Name, w.X0, w.Y0, w.X1, w.Y1)
-// 			if err != nil && err != gocui.ErrUnknownView {
-// 				return err
-// 			}
-// 			v.Title = w.Title
-// 			w.View = v
-// 			// Switch focus to the new view
-// 			g.SetCurrentView(w.Name)
-// 		} else {
-// 			// Hide/delete the view
-// 			err := g.DeleteView(w.Name)
-// 			if err != nil && err != gocui.ErrUnknownView {
-// 				return err
-// 			}
-// 			w.View = nil
-
-// 			// Pop from history and try to set the previous view
-// 			for len(VIEW_SWITCH_HISTORY) > 0 {
-// 				last := VIEW_SWITCH_HISTORY[len(VIEW_SWITCH_HISTORY)-1]
-// 				VIEW_SWITCH_HISTORY = VIEW_SWITCH_HISTORY[:len(VIEW_SWITCH_HISTORY)-1]
-// 				if v, _ := g.View(last); v != nil {
-// 					g.SetCurrentView(last)
-// 					break
-// 				}
-// 			}
-// 		}
-// 		return nil
-// 	})
-// }
+// fetch the current content input of that view;
+func FetchContent(w *models.Window, g *gocui.Gui) string {
+	return strings.TrimSpace(w.View.Buffer())
+}

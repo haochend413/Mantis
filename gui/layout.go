@@ -1,7 +1,11 @@
 package gui
 
 import (
+	"fmt"
+
 	"github.com/haochend413/mantis/controllers"
+	"github.com/haochend413/mantis/db"
+	"github.com/haochend413/mantis/db/dbstructs"
 	"github.com/jroimartin/gocui"
 )
 
@@ -47,6 +51,20 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 			}
 			if w.Cursor {
 				controllers.CursorOn(g, v)
+			}
+		}
+
+		if w.Name == "note-history" {
+			var history []dbstructs.Note
+			result := db.DBs.NoteDB.Db.Find(&history)
+
+			//display history
+			for _, note := range history {
+				fmt.Fprintln(v, note.Content)
+			}
+
+			if result.Error != nil {
+				return result.Error
 			}
 		}
 
