@@ -44,7 +44,6 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 			w.View = v
 			if w.Editable {
 				v.Editable = true
-
 			}
 			if w.Scroll {
 				v.Autoscroll = true
@@ -55,6 +54,11 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 		}
 
 		if w.Name == "note-history" {
+			nh, e := g.View("note-history")
+			nh.Clear()
+			if e != nil {
+				return e
+			}
 			var history []dbstructs.Note
 			result := db.DBs.NoteDB.Db.Find(&history)
 
