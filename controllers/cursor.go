@@ -1,29 +1,32 @@
 package controllers
 
 import (
-	"github.com/haochend413/mantis/models"
 	"github.com/jroimartin/gocui"
 )
 
 // This defines logic for cursor movements, make control functions;
 
-func CursorMoveMaker(g *gocui.Gui, viewName string) func(d models.Direction) error {
-	return func(d models.Direction) error {
-		v, _ := g.View(viewName)
-		switch d {
-		case models.Up:
-			return cursorUp(v)
-		case models.Down:
-			return cursorDown(v)
-		case models.Left:
-			return cursorLeft(v)
-		case models.Right:
-			return cursorRight(v)
-		default:
-			return nil
-		}
-	}
-}
+// func CursorMoveMaker(g *gocui.Gui, viewName string) []func(d models.Direction) error {
+// 	func (d models.Direction) error {
+// 		v, _ := g.View(viewName)
+// 		switch d {
+// 		case models.Up:
+// 			return cursorUp(v)
+// 		case models.Down:
+// 			return cursorDown(v)
+// 		case models.Left:
+// 			return cursorLeft(v)
+// 		case models.Right:
+// 			return cursorRight(v)
+// 		default:
+// 			return nil
+// 		}
+// 	return {
+// 	}
+// 	}
+// }
+
+// func MoveCursor(g *gocui.Gui)
 
 // This turns on / resets cursor
 func CursorOn(g *gocui.Gui, view *gocui.View) error {
@@ -47,7 +50,7 @@ func CursorOn(g *gocui.Gui, view *gocui.View) error {
 // h-j-k-l defines cursor movements;
 //right now: only for ineditable views; editable views need different modes that will be set later.
 
-func cursorUp(view *gocui.View) error {
+func CursorUp(view *gocui.View) error {
 	//g.Cursor = true should have already been set
 	//move up cursor
 
@@ -63,7 +66,7 @@ func cursorUp(view *gocui.View) error {
 
 }
 
-func cursorDown(view *gocui.View) error {
+func CursorDown(view *gocui.View) error {
 	//g.Cursor = true should have already been set
 	//move up cursor
 
@@ -80,7 +83,7 @@ func cursorDown(view *gocui.View) error {
 
 }
 
-func cursorLeft(view *gocui.View) error {
+func CursorLeft(view *gocui.View) error {
 	//g.Cursor = true should have already been set
 	//move up cursor
 
@@ -96,7 +99,7 @@ func cursorLeft(view *gocui.View) error {
 
 }
 
-func cursorRight(view *gocui.View) error {
+func CursorRight(view *gocui.View) error {
 	//g.Cursor = true should have already been set
 	//move up cursor
 

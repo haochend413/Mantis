@@ -9,12 +9,12 @@ import (
 	"github.com/jroimartin/gocui"
 )
 
-var FIRST_INIT_CHECK bool = true
+// var FIRST_INIT_CHECK bool = true
 
 // Define layout for all views;
 func (gui *Gui) layout(g *gocui.Gui) error {
 	//init template
-	if FIRST_INIT_CHECK {
+	if gui.first_init_check {
 		gui.windows = gui.CreateWindowTemplates()
 	}
 
@@ -30,9 +30,10 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 		// Only initialize if the view was just created
 
 		v, err := gui.prepareView(w)
-		if !w.OnDisplay {
-			g.DeleteView(w.Name)
-		}
+		// //Dont know why here, but might be useful
+		// if !w.OnDisplay {
+		// 	g.DeleteView(w.Name)
+		// }
 		if err != nil && err != gocui.ErrUnknownView {
 			return err
 		}
@@ -53,6 +54,7 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 			}
 		}
 
+		//view-specific logic here
 		if w.Name == "note-history" {
 			nh, e := g.View("note-history")
 			nh.Clear()
@@ -75,9 +77,9 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 	}
 
 	//setstartview
-	if FIRST_INIT_CHECK {
+	if gui.first_init_check {
 		g.SetCurrentView("note")
-		FIRST_INIT_CHECK = false
+		gui.first_init_check = false
 	}
 
 	return nil

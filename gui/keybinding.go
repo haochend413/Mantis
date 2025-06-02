@@ -60,5 +60,29 @@ func CreateAllKeybinders(gui *Gui) []*models.KeyBinder {
 			Modifier: gocui.ModNone,
 			Handler:  gui.HandleSendNote,
 		},
+		{
+			ViewName: "note-history",
+			Key:      "up",
+			Modifier: gocui.ModNone,
+			Handler:  gui.HandleNoteCursorMove("up"),
+		},
+		{
+			ViewName: "note-history",
+			Key:      "down",
+			Modifier: gocui.ModNone,
+			Handler:  gui.HandleNoteCursorMove("down"),
+		},
+		{
+			ViewName: "note-history",
+			Key:      "left",
+			Modifier: gocui.ModNone,
+			Handler:  gui.HandleNoteCursorMove("left"),
+		},
+		{
+			ViewName: "note-history",
+			Key:      "right",
+			Modifier: gocui.ModNone,
+			Handler:  gui.HandleNoteCursorMove("right"),
+		},
 	}
 }

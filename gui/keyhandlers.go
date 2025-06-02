@@ -28,6 +28,24 @@ func (gui *Gui) HandleCmdDisplay(g *gocui.Gui, v *gocui.View) error {
 	return ToggleWindowDisplay(gui.windows[2], gui.g)
 }
 
+// Move Cursor;
+func (gui *Gui) HandleNoteCursorMove(direction string) func(*gocui.Gui, *gocui.View) error {
+	return func(g *gocui.Gui, v *gocui.View) error {
+		switch direction {
+		case "up":
+			return controllers.CursorUp(gui.windows[1].View)
+		case "down":
+			return controllers.CursorDown(gui.windows[1].View)
+		case "left":
+			return controllers.CursorLeft(gui.windows[1].View)
+		case "right":
+			return controllers.CursorRight(gui.windows[1].View)
+		default:
+			return nil
+		}
+	}
+}
+
 /*
 Note view
 */

@@ -9,8 +9,9 @@ import (
 
 // main Gui struct
 type Gui struct {
-	g       *gocui.Gui
-	windows []*models.Window
+	g                *gocui.Gui
+	windows          []*models.Window
+	first_init_check bool
 }
 
 // need to use a map to hande quick window search
@@ -27,7 +28,9 @@ func (gui *Gui) GuiInit() {
 	gui.g = g
 	defer gui.g.Close()
 	//
-	// Set layout manager function (called every frame to layout views)
+	//set configs for layout functions
+	gui.first_init_check = true
+	// Set layout manager function (called every frame to layout views) (set windows)
 	gui.g.SetManagerFunc(gui.layout)
 
 	//init keybindings
